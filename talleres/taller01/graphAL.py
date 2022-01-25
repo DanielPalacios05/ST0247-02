@@ -7,7 +7,7 @@ class GraphAL:
     
     def __init__(self, size):
 
-        self.adList = []
+        self.adList = [0]*size
         
         for i in range(size):
             self.adList.append(deque())
@@ -53,17 +53,3 @@ class GraphAL:
         
         else:
             print("Check if the chosen vertex are valid")
-            
-            
-            
-
-def __main__():
-    grafo=GraphAL(3)
-    grafo.addArc(0,1,5)
-    grafo.addArc(0,2,2)
-    grafo.addArc(1,2,1)
-    grafo.addArc(1, 1, 9)
-    print(grafo.getSuccessors(0))
-    print(grafo.getSuccessors(1))
-    print(grafo.getWeight(1,1))
-__main__()

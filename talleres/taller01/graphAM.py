@@ -25,15 +25,3 @@ class GraphAM:
     def getWeight(self, source, destination):
 
         return self.adMatrix[source][destination]
-
-
-def __main__():
-    grafo=GraphAM(3)
-    grafo.addArc(0,1,5)
-    grafo.addArc(0,2,2)
-    grafo.addArc(1,2,1)
-    grafo.addArc(1, 1, 9)
-    print(grafo.getSuccessors(0))
-    print(grafo.getSuccessors(1))
-    print(grafo.getWeight(1,1))
-__main__()
