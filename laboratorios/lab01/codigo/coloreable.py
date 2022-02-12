@@ -14,7 +14,6 @@ def main():
         for _ in range(aristas):
             
             arista = list(map(int, input().split()))
-              
             graph.addUndirArc(arista[0],arista[1])        
         
         graphList.append(graph)
@@ -24,23 +23,7 @@ def main():
         
     while graphList:
         graphList.popleft().coloreable()
-        
-        
-        
-        
-        
-    
-        
-         
-
-    
-    
-    
-    
-
-
 
 if __name__ == '__main__':
     main()
-    
-    
+
