@@ -1,14 +1,16 @@
-with open("codigo\mapa.txt",'r') as archivos:
+archivos = open("laboratorios\lab01\codigo\mapa.txt",'r')
+a = archivos.readline()
+a = archivos.readline()
+a = archivos.readline()
+while a.strip() != "":
+    print(a.split())
     a = archivos.readline()
 
-    while a.strip() != "":
+a = archivos.readline()
+a = archivos.readline()
+a = archivos.readline()
+while  a.strip() != "":
         print(a.split())
         a = archivos.readline()
 
-    a = archivos.readline()
-    print("==========================edges===========================")
-
-    while  a.strip() != "":
-        print(a.split())
-        a = archivos.readline()
 
