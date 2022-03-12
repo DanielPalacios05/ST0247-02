@@ -10,7 +10,7 @@ class GraphAL:
         self.adList = [0]*size
         
         for i in range(size):
-            self.adList.append(deque())
+            self.adList[i]=deque()
     
         self.size = size
 
