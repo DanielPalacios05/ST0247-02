@@ -1,3 +1,4 @@
+import time
 from collections import deque
 def seAtacanHastaI(tablero, i):
     for j in range(0,i+1): #N
@@ -50,7 +51,10 @@ def main():
                     if linea[j] == '*':
                         listaMalCuadro.append((i,j)) 
                 i+=1
+        start=time.time()
         listaSalidas.append(casosPosibles(numTablero,listaMalCuadro))  
+        end=time.time()
+        print(start-end)
         numTablero=int(input())
     for i,k in enumerate(listaSalidas):
         print("Caso "+str(i+1)+": "+str(k))
