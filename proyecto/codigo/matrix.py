@@ -16,7 +16,7 @@ class Graph:
         
     def iniMatrix(self,nodes):
         
-        self.matrix = np.zeros((nodes,nodes))
+        self.matrix = np.empty((nodes,nodes), dtype = np.object)
         
         
         

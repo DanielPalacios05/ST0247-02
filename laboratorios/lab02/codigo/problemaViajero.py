@@ -18,42 +18,43 @@ def viajero(grafo : GraphAl):
 
     vertexDif0 = []
     distanciaMenor=inf
+    
     for i in grafo.diccionarioNombre.keys():
 
         vertexDif0.append(i)
 
     del vertexDif0[0]
-    comprobante=False
+    
     respuestas = deque()
+    
+    primerNodo = next(iter(grafo.diccionarioRutas))
 
     for i in all_perms(vertexDif0):
 
-        permutacion = [next(iter(grafo.diccionarioRutas))] + i + [next(iter(grafo.diccionarioRutas))]
-        comprobante=False
+        
+        permutacion = [primerNodo] + i + [primerNodo]
+        
+        comprobante=True
 
         for j in range(len(permutacion)-1):
 
-            if permutacion[j+1] in grafo.getSuccessors(permutacion[j]):
-                comprobante=True
-            else:
+            if permutacion[j+1] not in grafo.getSuccessors(permutacion[j]):
                 comprobante=False
                 break
         
-        if comprobante:
-            respuestas.append(permutacion)
-    print(respuestas)
-    for lista in respuestas:
-        distanciaActul=0
-        for i in range(len(lista)-1):
-            distanciaActul+= float(grafo.getWeight(lista[i],lista[i+1]))
-        if distanciaActul<distanciaMenor:
-            distanciaMenor=distanciaActul
+        if comprobante: 
+            distanciaActual=0
+            for i in range(len(permutacion)-1):
+                distanciaActual+= float(grafo.getWeight(permutacion[i],permutacion[i+1]))
+            if distanciaActual<distanciaMenor:
+                distanciaMenor=distanciaActual
+                    
     return distanciaMenor
 
 
 def main(): 
 
-    archivos = open("laboratorios\lab02\codigo\puentesColgantes.txt", 'r')
+    archivos = open("codigo\puentesColgantes.txt", 'r')
     aristas = deque()
     vertices = deque()
     a = archivos.readline()
@@ -80,7 +81,7 @@ def main():
     grafo = GraphAl(vertices, aristas)
 
 
-    print(viajero(grafo))
+    print("La distancia menor es:" ,viajero(grafo))
 
 
 
