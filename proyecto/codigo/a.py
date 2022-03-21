@@ -4,10 +4,46 @@ from graphAL import GraphAL
 from collections import deque
 from math import inf
 
+
+def caminoCorto(grafo: GraphAL,n):
+    
+    visitados = [False] * grafo.size
+    
+    return caminoCortoAux(grafo, 0,n,visitados)
+
+def caminoCortoAux(grafo:GraphAL,begin, fin,visitados):
+    visitados[begin]=True
+    if begin==fin:
+        rutaFinal=deque()
+        rutaFinal.appendleft(fin)
+        return (rutaFinal,0)
+    else:
+        distanciaMenor=inf
+        rutaCorta=deque()
+        for lugar in grafo.getSuccessors(begin):
+            
+            if not visitados[lugar]:
+                par=caminoCortoAux(grafo,int(lugar),fin,visitados)
+                rutaPosible=par[0]
+                distancia=par[1]
+                rutaPosible.appendleft(begin)
+                distanciaActual=grafo.getWeight(begin,lugar)+distancia
+                if distanciaActual<=distanciaMenor:
+                    rutaCorta=rutaPosible
+                    distanciaMenor=distanciaActual
+                visitados[lugar]=False
+        return rutaCorta,distanciaMenor
+    
+    
+    
+    
+
 data = pd.read_csv("proyecto\codigo\calles_de_medellin_con_acoso.csv",
                    sep=";", usecols=[0, 1, 2, 3, 4, 5])
 
 arrdata = data.to_numpy()
+
+print(arrdata)
 
 
 mapa = GraphAL()
@@ -37,38 +73,6 @@ for i in arrdata:
     else:
          mapa.addArc(mapa.vertices[i[1]],mapa.vertices[i[2]],(i[0],i[3],i[5]))
          
-
-
-    
-    
-def caminoCorto(grafo: GraphAL,inicio,final,riesgoMaximo):
-    
-    visitados = [False] * grafo.size
-    
-    return caminoCortoAux(grafo, inicio,final,visitados,riesgoMaximo)[0]
-
-def caminoCortoAux(grafo:GraphAL,begin, fin,visitados,riesgoMaximo):
-    visitados[begin]=True
-    if begin==fin:
-        rutaFinal=deque()
-        rutaFinal.appendleft(fin)
-        return (rutaFinal,0)
-    else:
-        distanciaMenor=inf
-        rutaCorta=deque()
-        for lugar in grafo.getSuccessors(begin):
-            
-            if not visitados[lugar]:
-                trio=caminoCortoAux(grafo,int(lugar),fin,visitados)
-                rutaPosible=trio[0]
-                distancia=trio[1]
-                rutaPosible.appendleft(begin)
-                distanciaActual=float(grafo.getWeight(begin,lugar))+distancia
-                riesgoActual = 0;
-                if distanciaActual<=distanciaMenor:
-                    rutaCorta=rutaPosible
-                    distanciaMenor=distanciaActual
-                visitados[lugar]=False
-        return rutaCorta,distanciaMenor,riesgoActual
+print(caminoCorto(mapa,1))
     
     

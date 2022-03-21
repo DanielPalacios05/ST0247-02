@@ -1,19 +1,16 @@
 from collections import deque
-from sqlite3 import adapt
 
 
 class GraphAL:
     
-    def __init__(self):
+    def __init__(self, size):
         
-        self.diccionarioVisita = {}
         
-        self.vertices = {}
+        self.size = size
+        self.adList = [0]*size
         
-        self.size = 0
-        
-        self.adList = None
-        
+        for i in range(len(self.adList)):
+            self.adList[i] = deque()
         
 
         # Array of linked Lists with tuples where ( vertex, weight)
@@ -21,20 +18,11 @@ class GraphAL:
     def checkVertex(self, vertex):
 
         return 0 <= vertex < self.size
-    
-    def iniList(self,size):
-        
-        self.size = size
-        
-        self.adList = [0]*self.size
-        
-        for i in range(len(self.adList)):
-            self.adList[i] = deque()
 
     def addArc(self, vertex, vertex2, weight):
 
         if self.checkVertex(vertex) and self.checkVertex(vertex2):
-            self.adList[vertex].append((vertex2, weight[0],weight[1],weight[2]))     # 0 -> (0,nombre,peso,indice))
+            self.adList[vertex].append((vertex2, weight))
         else:
             print("Check if the chosen vertex are valid")
             
@@ -58,7 +46,7 @@ class GraphAL:
                 
             return list1
 
-    def getData(self, source, destination):
+    def getWeight(self, source, destination):
         
         if self.checkVertex(source) and self.checkVertex(destination):
         
@@ -67,17 +55,7 @@ class GraphAL:
             for i in sourceAdjacent:
                 
                 if i[0] == destination:
-                    return i
+                    return i[1]
         
         else:
             print("Check if the chosen vertex are valid")
-            
-    def getWeight(self,source,destination):
-        return self.getData(source,destination)[2]
-    
-    def getRisk(self,source,destination):
-        return self.getData(source,destination)[3]
-            
-
-            
-            
