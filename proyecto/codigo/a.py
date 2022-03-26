@@ -43,32 +43,21 @@ for i in arrdata:
     
 def caminoCorto(grafo: GraphAL,inicio,final,riesgoMaximo):
     
-    visitados = [False] * grafo.size
     
-    return caminoCortoAux(grafo, inicio,final,visitados,riesgoMaximo)[0]
+    
+    return caminoCortoAux(grafo, inicio,final,riesgoMaximo)[0]
 
-def caminoCortoAux(grafo:GraphAL,begin, fin,visitados,riesgoMaximo):
+def caminoCortoAux(grafo:GraphAL,begin, fin,riesgoMaximo):
+    visitados = [False] * grafo.size
     visitados[begin]=True
-    if begin==fin:
-        rutaFinal=deque()
-        rutaFinal.appendleft(fin)
-        return (rutaFinal,0)
-    else:
-        distanciaMenor=inf
-        rutaCorta=deque()
-        for lugar in grafo.getSuccessors(begin):
-            
-            if not visitados[lugar]:
-                trio=caminoCortoAux(grafo,int(lugar),fin,visitados)
-                rutaPosible=trio[0]
-                distancia=trio[1]
-                rutaPosible.appendleft(begin)
-                distanciaActual=float(grafo.getWeight(begin,lugar))+distancia
-                riesgoActual = 0;
-                if distanciaActual<=distanciaMenor:
-                    rutaCorta=rutaPosible
-                    distanciaMenor=distanciaActual
-                visitados[lugar]=False
-        return rutaCorta,distanciaMenor,riesgoActual
-    
+    distancias = [inf] * grafo.size
+    posiciones = [-1] * grafo.size
+    distancias[begin] = 0
+    v = -1
+
+    for i in range(n):
+        v = -1
+        for j in range(n):
+            if not 
+
     
