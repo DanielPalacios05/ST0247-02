@@ -50,7 +50,7 @@ def caminoCortoAux(grafo:GraphAL,begin, fin,riesgoMaximo):
 #arrdata = data.to_numpy()
 
 #print(arrdata)
-arrdata = pd.read_csv("calles_de_medellin_con_acoso.csv",sep=";", usecols=[0, 1, 2, 3, 4, 5])
+arrdata = pd.read_csv("proyecto\codigo\calles_de_medellin_con_acoso.csv",sep=";", usecols=[0, 1, 2, 3, 4, 5])
 
 mapa = GraphAL()
 
