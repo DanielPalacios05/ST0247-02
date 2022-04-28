@@ -46,7 +46,7 @@ def caminoCortoAux(grafo:GraphAL,begin, fin,riesgoMaximo):
     return camino, caminar, asalto
 
 def caminoSeguro(grafo: GraphAL,begin, fin , distanciaMaximo):
-    return caminoCortoAux(grafo, begin, fin, distanciaMaximo)
+    return caminoSeguroAux(grafo, begin, fin, distanciaMaximo)
 
 def caminoSeguroAux(grafo:GraphAL,begin, fin,distanciaMaximo):
     n=grafo.size
@@ -61,7 +61,7 @@ def caminoSeguroAux(grafo:GraphAL,begin, fin,distanciaMaximo):
         for j in range(n):
             if (not visitados[j]) and (visitando==-1 or riesgos[j]<riesgos[visitando]):
                 visitando=j
-        if distancias[visitando]==inf:
+        if riesgos[visitando]==inf:
             break
         visitados[visitando]=True
         for vecino in grafo.getSuccessors(visitando):
@@ -69,7 +69,7 @@ def caminoSeguroAux(grafo:GraphAL,begin, fin,distanciaMaximo):
             riesgo=grafo.getRisk(visitando,vecino)
             if distancias[visitando]+metros<distanciaMaximo:
                 if riesgos[visitando]+riesgo<riesgos[vecino]:
-                    distancias[vecino]=riesgos[visitando]+metros
+                    distancias[vecino]=distancias[visitando]+metros
                     riesgos[vecino]=riesgos[visitando]+riesgo
                     posiciones[vecino] = visitando
     
@@ -90,7 +90,7 @@ def caminoSeguroAux(grafo:GraphAL,begin, fin,distanciaMaximo):
 #arrdata = data.to_numpy()
 
 #print(arrdata)
-arrdata = pd.read_csv("proyecto\codigo\calles_de_medellin_con_acoso.csv",sep=";", usecols=[0, 1, 2, 3, 4, 5])
+arrdata = pd.read_csv("codigo\calles_de_medellin_con_acoso.csv",sep=";", usecols=[0, 1, 2, 3, 4, 5])
 
 mapa = GraphAL()
 
@@ -112,7 +112,7 @@ for i in range(len(arrdata)):
         mapa.addUndirArc(mapa.vertices[arrdata["origin"][i]],mapa.vertices[arrdata["destination"][i]],(arrdata["name"][i],arrdata["length"][i],arrdata["harassmentRisk"][i]))
     else:
         mapa.addArc(mapa.vertices[arrdata["origin"][i]],mapa.vertices[arrdata["destination"][i]],(arrdata["name"][i],arrdata["length"][i],arrdata["harassmentRisk"][i]))
-print(caminoCorto(mapa,0,40,5))
+#print(caminoCorto(mapa,0,40,5))
 print(caminoSeguro(mapa,0,40,500))
     
     
