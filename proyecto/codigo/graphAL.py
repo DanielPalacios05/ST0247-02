@@ -4,7 +4,7 @@ from sqlite3 import adapt
 
 class GraphAL:
     
-    def __init__(self):
+    def __init__(self): 
         
         self.diccionarioVisita = {}
         
