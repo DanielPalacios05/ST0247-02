@@ -3,6 +3,7 @@ from matrix import Graph
 from graphAL import GraphAL
 from collections import deque
 from math import inf
+import time
 
 
 def caminoCorto(grafo: GraphAL,begin, fin , riesgoMaximo):
@@ -54,7 +55,7 @@ def caminoSeguroAux(grafo:GraphAL,begin, fin,distanciaMaximo):
     distancias = [0] * n
     riesgos=[inf]*n
     posiciones = [-1] * n
-    distancias[begin] = 0
+    riesgos[begin] = 0
 
     for i in range(n):
         visitando = -1
@@ -112,7 +113,23 @@ for i in range(len(arrdata)):
         mapa.addUndirArc(mapa.vertices[arrdata["origin"][i]],mapa.vertices[arrdata["destination"][i]],(arrdata["name"][i],arrdata["length"][i],arrdata["harassmentRisk"][i]))
     else:
         mapa.addArc(mapa.vertices[arrdata["origin"][i]],mapa.vertices[arrdata["destination"][i]],(arrdata["name"][i],arrdata["length"][i],arrdata["harassmentRisk"][i]))
-print(caminoCorto(mapa,0,40,5))
-print(caminoSeguro(mapa,0,40,900))
-    
-    
+start=time.time()
+print(caminoCorto(mapa,8462,11296,100))
+print(caminoSeguro(mapa,8462,11296,8000))
+end=time.time()
+print(end-start)
+print("--------------------------------------------------------------------------")
+start=time.time()
+print(caminoCorto(mapa,2199,1112,45))
+print(caminoSeguro(mapa,2199,1112,7000))
+end=time.time()
+print(end-start)
+print("--------------------------------------------------------------------------")
+start=time.time()
+print(caminoCorto(mapa,1112,1413,10))
+print(caminoSeguro(mapa,1112,1413,6500))
+end=time.time()
+print(end-start)
+print("--------------------------------------------------------------------------")
+
+
