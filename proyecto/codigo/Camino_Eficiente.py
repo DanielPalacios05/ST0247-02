@@ -113,6 +113,8 @@ for i in range(len(arrdata)):
         mapa.addUndirArc(mapa.vertices[arrdata["origin"][i]],mapa.vertices[arrdata["destination"][i]],(arrdata["name"][i],arrdata["length"][i],arrdata["harassmentRisk"][i]))
     else:
         mapa.addArc(mapa.vertices[arrdata["origin"][i]],mapa.vertices[arrdata["destination"][i]],(arrdata["name"][i],arrdata["length"][i],arrdata["harassmentRisk"][i]))
+
+
 start=time.time()
 print(caminoCorto(mapa,8462,11296,100))
 print(caminoSeguro(mapa,8462,11296,8000))
@@ -131,5 +133,3 @@ print(caminoSeguro(mapa,1112,1413,6500))
 end=time.time()
 print(end-start)
 print("--------------------------------------------------------------------------")
-
-
